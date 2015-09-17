@@ -40,6 +40,10 @@ gulp.task("styles", function () {
   return gulp.src("src/assets/scss/style.scss")
     .pipe(plumber())
     .pipe($.sass())
+    .on('error', function(err){
+        browserSync.notify("SASS error: " + err.message, 5000);
+        this.emit('end');
+    })
     // AutoPrefix your CSS so it works between browsers
     .pipe($.autoprefixer("last 1 version", { cascade: true }))
     // Directory your CSS file goes to
@@ -127,6 +131,10 @@ gulp.task('elm', ['elm-init'], function(){
   return gulp.src('src/elm/Main.elm')
     .pipe(plumber())
     .pipe(elm())
+    .on('error', function(err){
+        browserSync.notify("Elm compile error: " + err.message, 5000);
+        this.emit('end');
+    })
     .pipe(gulp.dest('serve'));
 });
 
