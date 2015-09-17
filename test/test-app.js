@@ -16,6 +16,7 @@ describe('generator elmlang:app', function () {
   it('creates files', function () {
     assert.file([
       'elm-package.json',
+      '.gitignore',
       'gulpfile.js',
       'package.json',
     ]);

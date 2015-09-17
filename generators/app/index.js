@@ -17,6 +17,10 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('elm-package.json')
       );
       this.fs.copy(
+        this.templatePath('_gitignore'),
+        this.destinationPath('.gitignore')
+      );
+      this.fs.copy(
         this.templatePath('_package.json'),
         this.destinationPath('package.json')
       );
