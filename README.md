@@ -19,7 +19,7 @@ npm install -g generator-elmlang
 Finally, initiate the generator:
 
 ```bash
-yo generator elmlang
+yo elmlang
 ```
 
 ## Credits
