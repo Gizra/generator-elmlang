@@ -42,6 +42,7 @@ gulp.task("styles", function () {
     .pipe($.sass())
     .on('error', function(err){
         browserSync.notify("SASS error: " + err.message, 5000);
+        console.error(err.message);
         this.emit('end');
     })
     // AutoPrefix your CSS so it works between browsers
@@ -133,6 +134,7 @@ gulp.task('elm', ['elm-init'], function(){
     .pipe(elm())
     .on('error', function(err){
         browserSync.notify("Elm compile error: " + err.message, 5000);
+        console.error(err.message);
         this.emit('end');
     })
     .pipe(gulp.dest('serve'));
