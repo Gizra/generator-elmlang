@@ -1,7 +1,9 @@
-// Generated on 2015-05-04 using generator-jekyllized 0.7.3
 "use strict";
 
 var gulp = require("gulp");
+
+var gulpSequence = require('gulp-sequence');
+
 // Loads the plugins without having to list all of them, but you need
 // to call them as $.pluginname
 var $ = require("gulp-load-plugins")();
@@ -25,14 +27,14 @@ var reload = browserSync.reload;
 var bs;
 
 // Deletes the directory that is used to serve the site during development
-gulp.task("clean:dev", function() {
-  return del(["serve/**/*"]);
+gulp.task("clean:dev", function(cb) {
+  return del(["serve"], cb);
 });
 
 
 // Deletes the directory that the optimized site is output to
-gulp.task("clean:prod", function() {
-  return del(["dist/**/*"]);
+gulp.task("clean:prod", function(cb) {
+  return del(["dist"], cb);
 });
 
 
@@ -156,7 +158,7 @@ gulp.task('elm', ['elm-init'], function(){
 // BrowserSync will serve our site on a local server for us and other devices to use
 // It will also autoreload across all devices as well as keep the viewport synchronized
 // between them.
-gulp.task("serve:dev", ["styles", "elm", "copy:dev"], function () {
+gulp.task("serve:dev", ["build"], function () {
   bs = browserSync({
     notify: true,
     // tunnel: "",
@@ -173,6 +175,8 @@ gulp.task("watch", function () {
   // We need to copy dev, so index.html may be replaced by error messages.
   gulp.watch(["src/elm/*.elm"], ["elm", "copy:dev", reload]);
   gulp.watch(["src/assets/scss/**/*.scss"], ["styles", "copy:dev", reload]);
+  // Watch JS folder
+  gulp.watch(["src/index.html", "src/js/**/*.js"], ["copy:dev", reload]);
 });
 
 // Serve the site after optimizations to see that everything looks fine
@@ -187,13 +191,14 @@ gulp.task("serve:prod", function () {
 });
 
 // Default task, run when just writing "gulp" in the terminal
-gulp.task("default", ["build", "serve:dev", "watch"]);
+gulp.task("default", ["serve:dev", "watch"]);
 
-// Builds the site but doesnt serve it to you
-gulp.task("build", ["clean:dev", "styles", "copy:dev", "elm"], function () {});
+// Builds the site but doesn't serve it to you.
+// Delete should run and complete before other tasks.
+gulp.task("build", gulpSequence("clean:dev", ["styles", "copy:dev", "elm"]));
 
 // Builds your site with the "build" command and then runs all the optimizations on
 // it and outputs it to "./dist"
-gulp.task("publish", ["clean:prod", "build"], function () {
+gulp.task("publish", ["build", "clean:prod"], function () {
   gulp.start("minify", "cname", "images", "fonts");
 });
