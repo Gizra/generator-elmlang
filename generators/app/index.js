@@ -36,6 +36,10 @@ module.exports = yeoman.generators.Base.extend({
       throw new Error('Github repository URL should start with ' + baseUrl);
     }
 
+    this.log(chalk.blue('************************************************************'));
+    this.log(chalk.blue('Do not forget to enable Travis-CI via https://travis-ci.org/'));
+    this.log(chalk.blue('************************************************************'));
+
     // Remove the base URL, and trailing slash.
     return repoName.replace(baseUrl, '').replace(/\/$/, '');
   },
@@ -44,7 +48,6 @@ module.exports = yeoman.generators.Base.extend({
     if (this.options['github-repo']) {
       // Get the value from the CLI.
       this.githubRepo = this.getGithubRepo(this.options['github-repo']);
-      this.log('Setting GitHub repository to: ' + this.githubRepo);
       return;
     }
 
@@ -110,7 +113,14 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('gulpfile.js')
       );
 
+      this.fs.copy(
+        this.templatePath('_travis.yml'),
+        this.destinationPath('.travis.yml')
+      );
+
       this.template('README.md', 'README.md');
+      this.template('runTests.js', 'runTests.js');
+
 
       this.directory('src', 'src');
     }

@@ -16,10 +16,12 @@ describe('generator elmlang:app', function () {
   it('creates files', function () {
     assert.file([
       '.gitignore',
+      '.travis.yml',
       'elm-package.json',
       'gulpfile.js',
       'package.json',
-      'README.md'
+      'README.md',
+      'runTests.js'
     ]);
   });
 });
