@@ -15,10 +15,11 @@ describe('generator elmlang:app', function () {
 
   it('creates files', function () {
     assert.file([
-      'elm-package.json',
       '.gitignore',
+      'elm-package.json',
       'gulpfile.js',
       'package.json',
+      'README.md'
     ]);
   });
 });
