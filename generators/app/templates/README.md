@@ -1,12 +1,15 @@
-# Elm app
+[![Build Status](https://travis-ci.org/<%= githubRepo %>.svg?branch=master)](https://travis-ci.org/<%= githubRepo %>)
+
+
+> <%= projectName %>
 
 ## Installation
 
 Make sure the following are installed:
 
-* Elm
 * NodeJs (and npm)
-* Compass (for SASS)
+* Elm (`npm install -g elm@0.15.1`)
+* Compass (for SASS) (`gem update --system && gem install compass`)
 
 ## Usage
 
@@ -21,6 +24,10 @@ Make sure the following are installed:
 3. Deploy to GitHub's pages (`gh-pages` branch of your repository):
 
 `gulp deploy`
+
+## Unit Tests
+
+In order to view the tests on the browser Start elm reactor (elm-reactor) and navigate to http://0.0.0.0:8000/src/elm/TestRunner.elm
 
 
 ## License
