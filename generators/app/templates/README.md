@@ -22,6 +22,10 @@ Make sure the following are installed:
 
 `gulp deploy`
 
+## Unit Tests
+
+In order to view the tests on the browser Start elm reactor (elm-reactor) and navigate to http://0.0.0.0:8000/src/elm/TestRunner.elm
+
 
 ## License
 

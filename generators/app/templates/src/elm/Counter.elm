@@ -22,19 +22,21 @@ init =
 
 -- UPDATE
 
-type Action = Increment | Decrement
+type Action = Decrement | Increment
 
 update : Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
-    Increment ->
-      ( model + 1
-      , Effects.none
-      )
     Decrement ->
       ( model - 1
       , Effects.none
       )
+          
+    Increment ->
+      ( model + 1
+      , Effects.none
+      )
+
 
 
 -- VIEW
