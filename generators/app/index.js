@@ -97,10 +97,6 @@ module.exports = yeoman.generators.Base.extend({
   writing: {
     app: function () {
       this.fs.copy(
-        this.templatePath('_elm-package.json'),
-        this.destinationPath('elm-package.json')
-      );
-      this.fs.copy(
         this.templatePath('_gitignore'),
         this.destinationPath('.gitignore')
       );
@@ -118,6 +114,7 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('.travis.yml')
       );
 
+      this.template('_elm-package.json', 'elm-package.json');
       this.template('README.md', 'README.md');
       this.template('runTests.js', 'runTests.js');
 
