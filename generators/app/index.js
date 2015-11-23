@@ -110,7 +110,14 @@ module.exports = yeoman.generators.Base.extend({
         this.destinationPath('gulpfile.js')
       );
 
+      this.fs.copy(
+        this.templatePath('_travis.yml'),
+        this.destinationPath('.travis.yml')
+      );
+
       this.template('README.md', 'README.md');
+      this.template('runTests.js', 'runTests.js');
+
 
       this.directory('src', 'src');
     }
