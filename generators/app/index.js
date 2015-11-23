@@ -42,33 +42,45 @@ module.exports = yeoman.generators.Base.extend({
     }];
 
     this.prompt(prompts, function (props) {
-      this.githubRepo = props.githubRepo.replace('https://github.com/', '');
+      var baseUrl = 'https://github.com/';
+
+      if (!!props.githubRepo && props.githubRepo.indexOf(baseUrl) == -1) {
+        throw new Error('Github repository URL should start with ' + baseUrl);
+      }
+
+      this.githubRepo = props.githubRepo.replace(baseUrl, '').replace(/\/$/, '');
+      console.log(this.githubRepo);
       done();
     }.bind(this));
   },
 
   askForProjectName: function () {
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the ' + chalk.red('Hedley') + ' generator!'
-    ));
+    if (!this.githubRepo) {
+      var done = this.async();
 
+      var prompts = [{
+        name: 'projectName',
+        message: 'What is the project machine name?',
+        default: 'my-app'
+      }];
 
+      this.prompt(prompts, function (props) {
+        this.projectName = props.projectName;
 
-    var done = this.async();
+        done();
+      }.bind(this));
+    }
+    else {
+      // Get the project name from the GitHub project name.
+      var splitString = this.githubRepo.split('/');
+      if (splitString.length != 2) {
+        throw new Error ('GitHub repo name is malformed.');
+      }
 
-    var prompts = [{
-      name: 'projectName',
-      message: 'What is the project machine name?',
-      default: 'my-app'
-    }];
+      this.projectName = splitString[1];
+    }
 
-    this.prompt(prompts, function (props) {
-
-
-      done();
-    }.bind(this));
-  },  
+  },
 
 
   writing: {
