@@ -6,7 +6,7 @@ var yosay = require('yosay');
 module.exports = yeoman.generators.Base.extend({
   greet: function () {
     this.log(yosay(
-      'Welcome to the shining ' + chalk.red('GeneratorElmlang') + ' generator!'
+      'Welcome to the shining ' + chalk.red('Elm') + ' generator!'
     ));
   },
 
