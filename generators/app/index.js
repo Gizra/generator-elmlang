@@ -49,7 +49,6 @@ module.exports = yeoman.generators.Base.extend({
       }
 
       this.githubRepo = props.githubRepo.replace(baseUrl, '').replace(/\/$/, '');
-      console.log(this.githubRepo);
       done();
     }.bind(this));
   },
