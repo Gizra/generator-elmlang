@@ -7,9 +7,9 @@
 
 Make sure the following are installed:
 
-* Elm
 * NodeJs (and npm)
-* Compass (for SASS)
+* Elm (`npm install -g elm@0.15.1`)
+* Compass (for SASS) (`gem update --system && gem install compass`)
 
 ## Usage
 
