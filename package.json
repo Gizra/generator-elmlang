@@ -1,6 +1,6 @@
 {
   "name": "generator-elmlang",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
