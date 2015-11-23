@@ -25,10 +25,25 @@ module.exports = yeoman.generators.Base.extend({
     });
   },
 
+  // Proccess the given repo name.
+  getGithubRepo : function(repoName) {
+    if (!repoName) {
+      return '';
+    }
+    var baseUrl = 'https://github.com/';
+
+    if (repoName.indexOf(baseUrl) == -1) {
+      throw new Error('Github repository URL should start with ' + baseUrl);
+    }
+
+    // Remove the base URL, and trailing slash.
+    return repoName.replace(baseUrl, '').replace(/\/$/, '');
+  },
+
   askForGithubRepo: function () {
     if (this.options['github-repo']) {
       // Get the value from the CLI.
-      this.githubRepo = this.options['github-repo'];
+      this.githubRepo = this.getGithubRepo(this.options['github-repo']);
       this.log('Setting GitHub repository to: ' + this.githubRepo);
       return;
     }
@@ -42,13 +57,7 @@ module.exports = yeoman.generators.Base.extend({
     }];
 
     this.prompt(prompts, function (props) {
-      var baseUrl = 'https://github.com/';
-
-      if (!!props.githubRepo && props.githubRepo.indexOf(baseUrl) == -1) {
-        throw new Error('Github repository URL should start with ' + baseUrl);
-      }
-
-      this.githubRepo = props.githubRepo.replace(baseUrl, '').replace(/\/$/, '');
+      this.githubRepo = this.getGithubRepo(props.githubRepo);
       done();
     }.bind(this));
   },
