@@ -1,12 +1,12 @@
 [![Build Status](https://travis-ci.org/<%= githubRepo %>.svg?branch=master)](https://travis-ci.org/<%= githubRepo %>)
 
-
 > <%= projectName %>
 
 ## Installation
 
 Make sure the following are installed:
 
+* Elm (v0.16.0)
 * NodeJs (and npm)
 * Elm (`npm install -g elm@0.15.1`)
 * Compass (for SASS) (`gem update --system && gem install compass`)
@@ -28,7 +28,6 @@ Make sure the following are installed:
 ## Unit Tests
 
 In order to view the tests on the browser Start elm reactor (elm-reactor) and navigate to http://0.0.0.0:8000/src/elm/TestRunner.elm
-
 
 ## License
 

@@ -1,8 +1,6 @@
 module Main where
 
-import CounterTest
-import ElmTest.Test exposing (Test, suite)
-import ElmTest.Runner.Element exposing (runDisplay)
+import ElmTest exposing (..)
 import Graphics.Element exposing (Element)
 
 import CounterTest exposing (all)
@@ -15,4 +13,4 @@ allTests =
 
 main : Element
 main =
-  runDisplay allTests
+  elementRunner allTests

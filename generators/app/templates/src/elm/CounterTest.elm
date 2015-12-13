@@ -1,9 +1,8 @@
 module CounterTest where
 
-import ElmTest.Assertion exposing (..)
-import ElmTest.Test exposing (..)
+import ElmTest exposing (..)
 
-import Counter exposing (..)
+import Counter exposing (initialModel, Model)
 
 decrementActionSuite : Test
 decrementActionSuite =
