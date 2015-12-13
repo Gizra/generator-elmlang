@@ -1,25 +1,23 @@
 module CounterTest where
 
-import ElmTest.Assertion exposing (..)
-import ElmTest.Test exposing (..)
+import ElmTest exposing (..)
 
 import Counter exposing (initialModel, UpdateContext)
-import Effects exposing (Effects)
 
 decrementActionSuite : Test
 decrementActionSuite =
   suite "Decerment action"
-    [ test "negative count" (assertEqual -2 (updateCounter Count.Increment -1))
-    , test "zero count" (assertEqual -1 (updateCounter Count.Increment 0))
-    , test "positive count" (assertEqual 1 (updateCounter Count.Increment 1))
+    [ test "negative count" (assertEqual -2 (updateCounter Counter.Decrement -1))
+    , test "zero count" (assertEqual -1 (updateCounter Counter.Decrement 0))
+    , test "positive count" (assertEqual 0 (updateCounter Counter.Decrement 1))
     ]
 
 incrementActionSuite : Test
 incrementActionSuite =
   suite "Incerment action"
-    [ test "negative count" (assertEqual 0 (updateCounter Count.Increment -1))
-    , test "zero count" (assertEqual 1 (updateCounter Count.Increment 0))
-    , test "positive count" (assertEqual 2 (updateCounter Count.Increment 1))
+    [ test "negative count" (assertEqual 0 (updateCounter Counter.Increment -1))
+    , test "zero count" (assertEqual 1 (updateCounter Counter.Increment 0))
+    , test "positive count" (assertEqual 2 (updateCounter Counter.Increment 1))
     ]
 
 updateCounter : Counter.Action -> Int -> Counter.Model

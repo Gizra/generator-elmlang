@@ -1,8 +1,7 @@
 module Main where
 
-import Graphics.Element exposing (Element)
-
 import ElmTest exposing (..)
+import Graphics.Element exposing (Element)
 
 import CounterTest exposing (all)
 

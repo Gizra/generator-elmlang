@@ -1,4 +1,6 @@
-# Elm app
+[![Build Status](https://travis-ci.org/<%= githubRepo %>.svg?branch=master)](https://travis-ci.org/<%= githubRepo %>)
+
+> <%= projectName %>
 
 ## Installation
 
@@ -6,7 +8,8 @@ Make sure the following are installed:
 
 * Elm (v0.16.0)
 * NodeJs (and npm)
-* Compass (for SASS)
+* Elm (`npm install -g elm@0.15.1`)
+* Compass (for SASS) (`gem update --system && gem install compass`)
 
 ## Usage
 
