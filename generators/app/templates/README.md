@@ -4,7 +4,7 @@
 
 Make sure the following are installed:
 
-* Elm
+* Elm (v0.16.0)
 * NodeJs (and npm)
 * Compass (for SASS)
 
@@ -25,7 +25,6 @@ Make sure the following are installed:
 ## Unit Tests
 
 In order to view the tests on the browser Start elm reactor (elm-reactor) and navigate to http://0.0.0.0:8000/src/elm/TestRunner.elm
-
 
 ## License
 
