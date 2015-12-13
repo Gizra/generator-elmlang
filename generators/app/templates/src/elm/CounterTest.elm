@@ -2,7 +2,7 @@ module CounterTest where
 
 import ElmTest exposing (..)
 
-import Counter exposing (initialModel, UpdateContext)
+import Counter exposing (initialModel, Model)
 
 decrementActionSuite : Test
 decrementActionSuite =
