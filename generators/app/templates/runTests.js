@@ -7,7 +7,7 @@ casper.test.begin('Run the Elm tests', function suite(test) {
     // The test runner doesn't provide a class, so we have to do this query
     // selector.
     casper.waitForSelector('body > div > div > div', function() {
-      test.assertSelectorHasText('body > div > div > div', 'All tests passed');
+      test.assertSelectorHasText('pre', 'All tests passed');
     });
 
   });
