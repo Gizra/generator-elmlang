@@ -26,7 +26,7 @@ describe('generator elmlang:app', function () {
   });
 
   it('adds the stylesheet link to index.html', function () {
-    assert.fileContent('index.html', '<link rel="stylesheet" href="assets/stylesheets/style.css" />')
+    assert.fileContent('src/index.html', '<link rel="stylesheet" href="assets/stylesheets/style.css" />')
   });
 
 });
