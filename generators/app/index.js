@@ -1,7 +1,12 @@
 'use strict';
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
+var childProcess = require('child_process');
+var elmPackage = require('./templates/_elm-package.json');
+var semver = require('semver');
 var yosay = require('yosay');
+
+var SEMVER_REGEX = /\d{1,2}\.\d{1,2}\.\d{1,2}/;
 
 module.exports = yeoman.generators.Base.extend({
   greet: function () {
@@ -93,7 +98,6 @@ module.exports = yeoman.generators.Base.extend({
 
   },
 
-
   writing: {
     app: function () {
       this.fs.copy(
@@ -123,9 +127,40 @@ module.exports = yeoman.generators.Base.extend({
     }
   },
 
+  validateEnv: function () {
+    var done = this.async();
+    childProcess.exec('elm', function (error, stdout, stderr) {
+      if (error) {
+        done(new Error('The elm command emitted an error when we tried to call it! Make sure the Elm Platform is installed and retry.'));
+        return;
+      }
+      // Look for instances of a semver in the elm command output. If none exist, it may mean a new version of the Elm
+      // Platform not accounted for at the time of writing.
+      var elmSemverMatches = SEMVER_REGEX.exec(stdout);
+      if (!elmSemverMatches) {
+        done(new Error('We couldn\'t find a semver for the Elm Platform in elm command output. Your Elm Platform version may be unsupported.'));
+        return;
+      }
+      // Get the minimum version and the earliest unsupported version semvers from the elm-package.json.
+      // Note: This is sensitive to string formatting of the elm-version in elm-platform.json. but adheres to the standard.
+      var versionRange = elmPackage['elm-version'].split('<');
+      var minimumSemver = versionRange[0].trim();
+      var unsupportedSemver = versionRange[versionRange.length - 1].trim();
+      var installedSemver = elmSemverMatches[0];
+      // Check that the installed version falls within the specified range.
+      var isMinimumSatisfied = semver.satisfies(installedSemver, '>= ' + minimumSemver);
+      var isMaximumSatisfied = semver.satisfies(installedSemver, '< ' + unsupportedSemver);
+      if (!isMinimumSatisfied || !isMaximumSatisfied) {
+        done(new Error('Unsupported Elm Platform version! Install Elm Platform ' + minimumSemver + ' (or later) and retry.'));
+        return;
+      }
+      done();
+    });
+  },
+
   install: function () {
     if (this.options['skip-install']) {
-      this.log('Skiped installation');
+      this.log('Skipped installation');
       return;
     }
 
