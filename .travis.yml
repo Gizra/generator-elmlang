@@ -3,3 +3,4 @@ node_js:
   - "0.10"
 install:
   - npm install -g elm@0.17.0
+  - npm install
