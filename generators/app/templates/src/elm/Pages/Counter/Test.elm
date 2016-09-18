@@ -1,7 +1,8 @@
-module CounterTest exposing (..)
+module Pages.Counter.Test exposing (..)
 
 import ElmTest exposing (..)
-import Counter exposing (initialModel, Model)
+import Pages.Counter.Model as Counter exposing (emptyModel, Model)
+import Pages.Counter.Update as Counter exposing (..)
 
 
 decrementActionSuite : Test
