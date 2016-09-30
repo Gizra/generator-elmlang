@@ -21,7 +21,6 @@ view model =
                 , div [] [ text <| "pageCounter: " ++ toString model.pageCounter ]
                 ]
             ]
-        , viewFooter
         ]
 
 
@@ -59,27 +58,6 @@ viewMainContent model =
         PageNotFound ->
             -- We don't need to pass any cmds, so we can call the view directly
             Pages.PageNotFound.View.view
-
-
-viewFooter : Html Msg
-viewFooter =
-    div
-        [ class "ui inverted vertical footer segment form-page"
-        ]
-        [ div [ class "ui container" ]
-            [ a
-                [ href "http://gizra.com"
-                , target "_blank"
-                ]
-                [ text "Gizra" ]
-            , span [] [ text " // " ]
-            , a
-                [ href "https://github.com/Gizra/elm-spa-example"
-                , target "_blank"
-                ]
-                [ text "Github" ]
-            ]
-        ]
 
 
 {-| Get menu items classes. This function gets the active page and checks if
