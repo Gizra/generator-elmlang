@@ -7,6 +7,5 @@ type alias BackendUrl =
 
 type alias Model =
     { backendUrl : BackendUrl
-    , hostname : String
     , name : String
     }

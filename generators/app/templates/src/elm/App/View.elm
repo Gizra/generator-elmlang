@@ -31,6 +31,7 @@ view model =
                         , div [] [ text <| "pageCounter: " ++ toString model.pageCounter ]
                         , div [] [ text <| "pageLogin: " ++ toString model.pageLogin ]
                         , div [] [ text <| "user: " ++ toString model.user ]
+                        , div [] [ text <| "config: " ++ toString model.config ]
                         ]
                     ]
                 , viewFooter

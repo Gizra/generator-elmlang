@@ -2,7 +2,8 @@ module App.Router exposing (delta2url, location2messages)
 
 import App.Model exposing (..)
 import App.Update exposing (..)
-import Config exposing (backends)
+import Config exposing (configs)
+import Dict exposing (..)
 import Navigation exposing (Location)
 import RouteUrl exposing (HistoryEntry(..), UrlChange)
 
@@ -59,14 +60,9 @@ location2messages location =
 
 getConfigFromLocation : Location -> Msg
 getConfigFromLocation location =
-    let
-        config =
-            List.filter (\backend -> backend.hostname == location.hostname) backends
-                |> List.head
-    in
-        case config of
-            Just val ->
-                SetConfig val
+    case (Dict.get location.hostname configs) of
+        Just val ->
+            SetConfig val
 
-            Nothing ->
-                SetConfigError
+        Nothing ->
+            SetConfigError
