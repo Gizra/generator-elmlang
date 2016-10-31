@@ -1,6 +1,7 @@
 module Pages.Login.Test exposing (all)
 
-import ElmTest exposing (..)
+import Test exposing (..)
+import Expect
 import RemoteData exposing (RemoteData(..), WebData)
 import Pages.Login.Model exposing (..)
 import Pages.Login.Update exposing (..)
@@ -9,17 +10,22 @@ import User.Model exposing (..)
 
 setLogin : Test
 setLogin =
-    suite "SetLogin msg"
-        [ test "set name without spaces"
-            (assertEqual "noSpaces" (getLogin "noSpaces"))
-        , test "set name with space"
-            (assertEqual "withSpaces" (getLogin "with Spaces"))
-        , test "set name with multiple spaces"
-            (assertEqual "withSpaces" (getLogin "  with   Spaces  "))
-        , test "set name should result with NotAsked user status if name changed"
-            (assertEqual NotAsked (getUserStatusAfterSetLogin Loading "someName" emptyModel))
-        , test "set name should result with existing user status if name didn't change"
-            (assertEqual Loading (getUserStatusAfterSetLogin Loading "  someName  " { login = "someName" }))
+    describe "SetLogin msg"
+        [ test "set name without spaces" <|
+            \() ->
+                Expect.equal "noSpaces" (getLogin "noSpaces")
+        , test "set name with space" <|
+            \() ->
+                Expect.equal "withSpaces" (getLogin "with Spaces")
+        , test "set name with multiple spaces" <|
+            \() ->
+                Expect.equal "withSpaces" (getLogin "  with   Spaces  ")
+        , test "set name should result with NotAsked user status if name changed" <|
+            \() ->
+                Expect.equal NotAsked (getUserStatusAfterSetLogin Loading "someName" emptyModel)
+        , test "set name should result with existing user status if name didn't change" <|
+            \() ->
+                Expect.equal Loading (getUserStatusAfterSetLogin Loading "  someName  " { login = "someName" })
         ]
 
 
@@ -52,9 +58,10 @@ getUserStatusAfterSetLogin user login model =
 
 tryLogin : Test
 tryLogin =
-    suite "TryLogin msg"
-        [ test "Fetch empty name"
-            (assertEqual NotAsked (getTryLogin NotAsked { login = "" }))
+    describe "TryLogin msg"
+        [ test "Fetch empty name" <|
+            \() ->
+                Expect.equal NotAsked (getTryLogin NotAsked { login = "" })
         ]
 
 
@@ -69,7 +76,7 @@ getTryLogin user model =
 
 all : Test
 all =
-    suite "Pages.Login tests"
+    describe "Pages.Login tests"
         [ setLogin
         , tryLogin
         ]
