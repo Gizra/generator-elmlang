@@ -8,7 +8,7 @@ cache:
     - sysconfcpus
 
 install:
-  - npm install -g elm@~0.17.0 casperjs http-server
+  - npm install -g elm@~0.18.0 casperjs http-server
   - elm-package install -y
   # Getting elm-make to run quicker.
   # See https://github.com/elm-lang/elm-compiler/issues/1473#issuecomment-245704142

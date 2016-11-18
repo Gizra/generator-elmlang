@@ -2,7 +2,7 @@
 
 > [Yeoman](http://yeoman.io) generator for [Elm](http://elm-lang.org/)
 
-Scaffold an Elm app (v0.17.0), with a `gulpfile` to ease development and deployment. See [example](https://github.com/Gizra/generator-elmlang-example) of a scaffolded repository.
+Scaffold an Elm app (v0.18.0), with a `gulpfile` to ease development and deployment. See [example](https://github.com/Gizra/generator-elmlang-example) of a scaffolded repository.
 
 ## Getting Started
 
